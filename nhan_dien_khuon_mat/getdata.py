@@ -3,54 +3,46 @@ import numpy as np
 import sqlite3
 import os
 
-def insert0rUpdate(id, name):
-    conn = sqlite3.connect('Data.db')
-    query = "Select * from People WHERE ID= "+str(id)
+def insertor_update(id, name, age, mssv):
+    conn = sqlite3.connect("Data.db")
+    query = "Select * from People Where ID= "+str(id)
     cursor = conn.execute(query)
     isRecordExist = 0
     for row in cursor:
         isRecordExist = 1
     if(isRecordExist == 0):
-        query = "INSERT INTO People(ID, Name, Age) VALUES("+str(id)+","+str(name)+")"
+        query = "Insert into People(ID, Name, Age, MSSV) values("+str(id)+",'"+str(name)+"','"+str(age)+"','"+str(mssv)+"')"
     else:
-        query = "UPDATE People SET Name ="+str(name)+"Where ID ="+str(id)
-
+        query = "Update People set Name ='"+str(name)+"', Age = '"+str(age)+"', MSSV = '"+str(mssv)+"' Where ID ="+str(id)
     conn.execute(query)
     conn.commit()
     conn.close()
 
 id = input("ID: ")
 name = input("Name: ")
-insert0rUpdate(id, name)
+age = input("Age: ")
+mssv = input("MSSV: ")
+insertor_update(id, name, age, mssv)
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-sampleNum = 0
+sample_Num = 0
 cap = cv2.VideoCapture(0)
 
 while True:
-    #ghi hình
-    ret, frame = cap.read()
-    
+    ret, frame = cap.read()  
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-    faces = face_cascade.detectMultiScale(gray)
-
+    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     for (x, y, w, h) in faces:
-        sampleNum +=1
-
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-        if not os.path.exists('dataSet'):
-            os.makedirs('dataSet')
-
-        cv2.imwrite("dataSet/vippro."+str(id)+"."+str(sampleNum)+ ".jpg", gray[y:y+h,x:x+w])
-
-    cv2.imshow('frame', frame)
+        if not os.path.exists("data"):
+            os.makedirs("data")
+        sample_Num +=1
+        cv2.imwrite("data/user."+str(id)+"."+str(sample_Num)+ ".jpg", gray[y:y+h,x:x+w])
+    cv2.imshow("getdata", frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-
-    if sampleNum>1000:
+    if sample_Num>1000:
         break
 
 cap.release()

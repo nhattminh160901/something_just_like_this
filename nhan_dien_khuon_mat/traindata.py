@@ -2,38 +2,30 @@ import cv2
 import numpy as np
 import os
 from PIL import Image
+
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-path = 'dataSet'
+path = 'data'
 
-def getImagesWidthID(path):
+def get_images_width_ID(path):
     imagePaths = [os.path.join(path,f) for f in os.listdir(path)]
-
     print(imagePaths)
-
     faces = []
     IDs = []
-
     for imagePaths in imagePaths:
         faceImg=Image.open(imagePaths).convert('L')
         faceNp=np.array(faceImg,'uint8')
         print(faceNp)
-
         ID=int(imagePaths.split('\\')[1].split('.')[1])
-
         faces.append(faceNp)
         IDs.append(ID)
-
         cv2.imshow('Training', faceNp)
         cv2.waitKey(5000)       
-
         return faces, IDs
         
-faces, IDs = getImagesWidthID(path)
-
+faces, IDs = get_images_width_ID(path)
 recognizer.train(faces, np.array(IDs))
-
 if not os.path.exists('recognizer'):
     os.makedirs('recognizer')
 
-recognizer.save('recognizer/trainingdata.yml')
+recognizer.save('recognizer/training_data.yml')
 cv2.destroyAllWindows
