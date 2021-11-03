@@ -4,28 +4,27 @@ import os
 from PIL import Image
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
+detector= cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 path = 'data'
 
-def get_images_width_ID(path):
-    imagePaths = [os.path.join(path,f) for f in os.listdir(path)]
-    print(imagePaths)
-    faces = []
+def getImagesWidthID(path):
+    imagePaths = [os.path.join(path,f) for f in os.listdir(path)] 
+    facelessvoid = []
     IDs = []
-    for imagePaths in imagePaths:
-        faceImg=Image.open(imagePaths).convert('L')
+    for imagePath in imagePaths:
+        faceImg=Image.open(imagePath).convert('L')
         faceNp=np.array(faceImg,'uint8')
-        print(faceNp)
-        ID=int(imagePaths.split('\\')[1].split('.')[1])
-        faces.append(faceNp)
-        IDs.append(ID)
-        cv2.imshow('Training', faceNp)
-        cv2.waitKey(5000)       
-        return faces, IDs
+        Id=int(os.path.split(imagePath)[-1].split(".")[1])
+        faces=detector.detectMultiScale(faceNp)
+        for (x,y,w,h) in faces:
+            facelessvoid.append(faceNp[y:y+h,x:x+w])
+            IDs.append(Id)
+    return facelessvoid,IDs
         
-faces, IDs = get_images_width_ID(path)
+faces, IDs = getImagesWidthID(path)
 recognizer.train(faces, np.array(IDs))
 if not os.path.exists('recognizer'):
     os.makedirs('recognizer')
 
 recognizer.save('recognizer/training_data.yml')
-cv2.destroyAllWindows
+cv2.destroyAllWindows()
