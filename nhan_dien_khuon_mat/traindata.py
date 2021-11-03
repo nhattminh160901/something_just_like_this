@@ -13,13 +13,13 @@ def getImagesWidthID(path):
     IDs = []
     for imagePath in imagePaths:
         faceImg=Image.open(imagePath).convert('L')
-        faceNp=np.array(faceImg,'uint8')
+        faceNp=np.array(faceImg, 'uint8')
         Id=int(os.path.split(imagePath)[-1].split(".")[1])
         faces=detector.detectMultiScale(faceNp)
         for (x,y,w,h) in faces:
             facelessvoid.append(faceNp[y:y+h,x:x+w])
             IDs.append(Id)
-    return facelessvoid,IDs
+    return facelessvoid, IDs
         
 faces, IDs = getImagesWidthID(path)
 recognizer.train(faces, np.array(IDs))
