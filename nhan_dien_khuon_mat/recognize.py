@@ -32,10 +32,10 @@ while True:
         id, confidence = recognizer.predict(r_gray)
         if confidence < 65:
             profile = get_profile(id)
-            if profile != None:
-                cv2.putText(frame, "Name: " + str(profile[1]), (x+10, y+h+30), fontface, 1, (0, 255, 0), 2)
-                cv2.putText(frame, "Age: " + str(profile[2]), (x+10, y+h+60), fontface, 1, (0, 255, 0), 2)
-                cv2.putText(frame, "MSSV: " + str(profile[3]), (x+10, y+h+90), fontface, 1, (0, 255, 0), 2)             
+        if profile != None:
+            cv2.putText(frame, "Name: " + str(profile[1]), (x+10, y+h+30), fontface, 1, (0, 255, 0), 2)
+            cv2.putText(frame, "Age: " + str(profile[2]), (x+10, y+h+60), fontface, 1, (0, 255, 0), 2)
+            cv2.putText(frame, "MSSV: " + str(profile[3]), (x+10, y+h+90), fontface, 1, (0, 255, 0), 2)             
         else:
             cv2.putText(frame, "Unknown", (x+10, y+h+30), fontface, 1, (0, 0, 255), 2)
     cv2.imshow('nhan_dien', frame)
