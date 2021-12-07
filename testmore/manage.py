@@ -36,8 +36,57 @@ class ManagementAll:
         yum.addYouthUnionMember()
         return yum.youthUnionMember()
 
+import random
 firstName = ['Minh', 'Tri', 'Thang', 'An', 'Bi', 'Con']
-lastName = []  
+lastName = ['Le Van', 'Le', 'Nguyen', 'Hoang', 'Ngo']
+sex = ['male', 'female']
+degreeType = ['TS', 'Th.S']
+specialization = ['KHDL&TTNT', 'KTDK&TDH']
+listTerm = ['python', 'mach dien', 'tin hoc ung dung', 'c++']
+listCredits = [2, 3, 4]
+listStudent = []
+dictClass = {}
+mng = ManagementAll()
+
+for i in range(10):
+    fN = random.choice(firstName)
+    lN = random.choice(lastName)
+    age = random.randint(18, 35)
+    phone = random.randint(10000, 100000)
+    email = fN+'@gmail.com'
+    cT = random.randint(1, 2)
+    stN = random. randint(1, 100)
+    gt = random.choice(sex)
+    spN = random.choice(specialization)
+    lT = []
+    lC = []
+    for i in range(1):
+        lT.append(random.choice(listTerm))
+        lC.append(random.choice(listCredits))
+
+    sv = mng.inputStudent(fN, lN, age, gt, phone, email, stN)
+    course = mng.inputCourse(cT, spN, lT, lC)
+    mng.getListStudent(sv, course, listStudent)
+
+for i in range(2):
+    fN = random.choice(firstName)
+    lN = random.choice(lastName)
+    age = random.randint(18, 35)
+    gt = random.choice(sex)
+    phone = random.randint(10000, 100000)
+    email = fN+'@gmail.com'
+    dT = random.choice(degreeType)
+    major = random.choice(specialization)
+    lec = mng.inputLecturer(fN, lN, age, gt, phone, email, dT, major)
+    dictClass[lec.getFullName()] = mng.addStudentToClass(lec, listStudent, major)
+    print(major)
+
+print(dictClass)
+for i in range(len(listStudent)):
+    pass
+
+
+
 # td = {}   
 # zz = []
 # mng = ManagementAll()
