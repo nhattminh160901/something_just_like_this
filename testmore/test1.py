@@ -90,7 +90,7 @@ class Lecturer(Person):
         self.classTerm = classTerm
 
     def getInformationLecturer(self):
-        return self.getInformation() + (self.degreeType, self.major)
+        return self.getInformation() + (self.degreeType, self.major, self.classTerm)
 
     def getClassName(self):
         return self.className

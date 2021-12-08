@@ -31,15 +31,10 @@ class ManagementAll:
         rank = Rank(sp, tp)
         return rank.ranked()
 
-    def addYUM(self, YUM:bool, inputStudent):
+    def addYUMList(self, YUM:bool, inputStudent):
         yum = YouthUnion(YUM, inputStudent)
         yum.addYouthUnionMember()
         return yum.youthUnionMember()
-
-    def findStudentbyFullName(self, listStudent:list, lastName:str, firstName:str):
-        for i in listStudent:
-            if i[0] == lastName and i[1] == firstName:
-                print(i)
 
     def findStudentbyRank(self, listStudent:list, rank:str):
         for i in listStudent:
