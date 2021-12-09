@@ -158,7 +158,7 @@ class FrontProgram:
     def sortStudentsList(self, listStudent):
         mng = ManagementAll()
         print("Choose condition to sort: ")
-        print("1. Sort by First Name\n2. Sort by Age\n3. Sort by GPA\n4. Sort by Training Point")
+        print("1. Sort by First Name\n2. Sort by GPA\n3. Sort by Training Point")
         choose = input("Your choose: ")
         choose = FrontProgram().check(choose)
         if choose == 1:
@@ -177,21 +177,11 @@ class FrontProgram:
             option = FrontProgram().check(option)
             if option == 1:
                 optioN = False
-                studentSort = mng.sortList(listStudent, 2, optioN)
+                studentSort = mng.sortList(listStudent, 11, optioN)
             elif option == 2:
                 optioN = True
-                studentSort = mng.sortList(listStudent, 2, optioN)
+                studentSort = mng.sortList(listStudent, 11, optioN)
         if choose == 3:
-            print("1. Ascending\n2. Descending")
-            option = input("Your choose: ")
-            option = FrontProgram().check(option)
-            if option == 1:
-                optioN = False
-                studentSort = mng.sortList(listStudent, 11, optioN)
-            elif option == 2:
-                optioN = True
-                studentSort = mng.sortList(listStudent, 11, optioN)
-        if choose == 4:
             print("1. Ascending\n2. Descending")
             option = input("Your choose: ")
             option = FrontProgram().check(option)
