@@ -12,17 +12,21 @@ class FrontProgram:
         try:
             n = float(n)
         except ValueError:
-            print("No valid integer! Please try again")
+            print("No valid float! Please try again")
         return n
 
     def inputStudentAndCourse(self):
         mng = ManagementAll()
         fN = input("First Name: ")
         lN = input("Last Name: ")
-        age = int(input("Age: "))
+        while True:
+            age = input("Age: ")
+            age = FrontProgram().check(age)
+            if type(age) == int:
+                break
         sex = input("Sex: ")
         phone = input("Phone Number: ")
-        phone = phone.replace('0', '+84', 1)
+        phone = phone.replace("0", "+84", 1)
         email = input("Email: ")
         sN = input("Student Number: ")
         sv = mng.inputStudent(fN, lN, age, sex, phone, email, sN)
@@ -75,10 +79,14 @@ class FrontProgram:
         mng = ManagementAll()
         fN = input("First Name: ")
         lN = input("Last Name: ")
-        age = int(input("Age: "))
+        while True:
+            age = input("Age: ")
+            age = FrontProgram().check(age)
+            if type(age) == int:
+                break
         sex = input("Sex: ")
         phone = input("Phone Number: ")
-        phone = phone.replace('0', '+84', 1)
+        phone = phone.replace("0", "+84", 1)
         email = input("Email: ")
         dT = input("Degree Type: ")
         major = input("Major: ")
@@ -86,7 +94,7 @@ class FrontProgram:
         lec = mng.inputLecturer(fN, lN, age, sex, phone, email, dT, major, tN)
         print(lec.getInformationLecturer())
         listLecturer.append(lec.getInformationLecturer())
-        allClass[lec.getFullName()] = mng.addStudentToClass(lec, listStudent)
+        allClass[lec.getFullName()+(lec.getClassName(),)] = mng.addStudentToClass(lec, listStudent)
         return allClass and listLecturer
 
     def addPointsAndRanks(self, listStudent:list):
@@ -110,3 +118,87 @@ class FrontProgram:
         if check == 0:
             print("Student Information is not found")
         return listStudent
+
+    def findStudentbyFullName(self, listStudent:list):
+        mng = ManagementAll()
+        fN = input("First Name: ")
+        lN = input("Last Name: ")
+        mng.findByFullName(fN, lN, listStudent)
+
+    def findStudentbyClass(self, listStudent:list):
+        mng = ManagementAll()
+        cN = input("Class Name: ")
+        mng.findByClass(listStudent, cN)
+
+    def findStudentbySex(self, listStudent:list):
+        mng = ManagementAll()
+        print("1. Male\n2. Female")
+        choose = input("Your choose: ")
+        if choose == 1:
+            mng.findBySex(listStudent, "Male")
+        if choose == 2:
+            mng.findBySex(listStudent, "Female")
+
+    def findStudentbyRank(self, listStudent:list):
+        mng = ManagementAll()
+        print("1. Very Good\n2. Good\n3. Average\n4. Weak\n5. Poor")
+        choose = input("Your choose: ")
+        choose = FrontProgram().check(choose)
+        if choose == 1:
+            mng.findByRank(listStudent, "Very Good")
+        if choose == 2:
+            mng.findByRank(listStudent, "Good")
+        if choose == 3:
+            mng.findByRank(listStudent, "Average")
+        if choose == 4:
+            mng.findByRank(listStudent, "Weak")
+        if choose == 5:
+            mng.findByRank(listStudent, "Poor")
+    
+    def sortStudentsList(self, listStudent):
+        mng = ManagementAll()
+        print("Choose condition to sort: ")
+        print("1. Sort by First Name\n2. Sort by Age\n3. Sort by GPA\n4. Sort by Training Point")
+        choose = input("Your choose: ")
+        choose = FrontProgram().check(choose)
+        if choose == 1:
+            print("1. Ascending\n2. Descending")
+            option = input("Your choose: ")
+            option = FrontProgram().check(option)
+            if option == 1:
+                optioN = False
+                studentSort = mng.sortList(listStudent, 1, optioN)
+            elif option == 2:
+                optioN = True
+                studentSort = mng.sortList(listStudent, 1, optioN)
+        if choose == 2:
+            print("1. Ascending\n2. Descending")
+            option = input("Your choose: ")
+            option = FrontProgram().check(option)
+            if option == 1:
+                optioN = False
+                studentSort = mng.sortList(listStudent, 2, optioN)
+            elif option == 2:
+                optioN = True
+                studentSort = mng.sortList(listStudent, 2, optioN)
+        if choose == 3:
+            print("1. Ascending\n2. Descending")
+            option = input("Your choose: ")
+            option = FrontProgram().check(option)
+            if option == 1:
+                optioN = False
+                studentSort = mng.sortList(listStudent, 11, optioN)
+            elif option == 2:
+                optioN = True
+                studentSort = mng.sortList(listStudent, 11, optioN)
+        if choose == 4:
+            print("1. Ascending\n2. Descending")
+            option = input("Your choose: ")
+            option = FrontProgram().check(option)
+            if option == 1:
+                optioN = False
+                studentSort = mng.sortList(listStudent, 12, optioN)
+            elif option == 2:
+                optioN = True
+                studentSort = mng.sortList(listStudent, 12, optioN)
+        return studentSort

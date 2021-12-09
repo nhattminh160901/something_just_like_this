@@ -1,6 +1,6 @@
 from frontprogram import *
 import time
-import csv
+import pickle as pk
 
 fp = FrontProgram()
 listStudent = []
@@ -35,7 +35,8 @@ while True:
             print("Please enter Information Student before use this")
         time.sleep(2)
     elif choose == 3:
-        print(listStudent)
+        for i in listStudent:
+            print(i)
         time.sleep(2)
     elif choose == 4:
         if cd == 0:
@@ -45,49 +46,70 @@ while True:
             fp.addStudentToClassLecturer(listStudent, informationAllClass, listLecturer)
             time.sleep(2)
     elif choose == 5:
-        fileLSName = input("File Name: ")
-        with open(fileLSName+".csv", "w", newline="") as f:
-            save = csv.writer(f)
-            save.writerow(["Last Name", "First Name", "Age", "Sex", "Phone", "Email", "Student Number"])
-            for i in listStudent:
-                save.writerow(i)
+        fileName = input("File Name: ")
+        with open(fileName+".pickle", "wb") as f:
+            save = pk.dump(listStudent, f)
             f.close()
     elif choose == 6:
-        fileYUMName = input("File Name: ")
-        with open(fileYUMName+".csv", "w",  newline="") as f:
-            save = csv.writer(f)
-            save.writerow(["Last Name", "First Name", "Age", "Sex", "Phone", "Email", "Student Number", "Status Youth Union"])
-            for i in listYUM:
-                save.writerow(i)
+        fileName = input("File Name: ")
+        with open(fileName+".pickle", "wb") as f:
+            save = pk.dump(listYUM, f)
             f.close()
     elif choose == 7:
-        fileLLName = input("File Name: ")
-        with open(fileLLName+".csv", "w",  newline="") as f:
-            save = csv.writer(f)
-            save.writerow(["Last Name", "First Name", "Age", "Sex", "Phone", "Email", "Degree Type", "Major", "Term Teaching"])
-            for i in listLecturer:
-                save.writerow(i)
+        fileName = input("File Name: ")
+        with open(fileName+".pickle", "wb") as f:
+            save = pk.dump(listLecturer, f)
             f.close()
     elif choose == 8:
-        fileAICName = input("File Name: ")
-        with open(fileAICName+".csv", "w",  newline="") as f:
-            save = csv.DictWriter(f, informationAllClass.keys())
-            save.writerow(informationAllClass)
+        fileName = input("File Name: ")
+        with open(fileName+".pickle", "wb") as f:
+            save = pk.dump(informationAllClass, f)
             f.close()
     elif choose == 9:
-        print(informationAllClass)
+        for i in informationAllClass:
+            print(f"{i}:", informationAllClass[i])
+        time.sleep(2)
     elif choose == 10:
         print("Finish the process of entering information!")
+        listStudentPointsandRank = listStudent
         time.sleep(2)
         break
 
-print("ALL TASKS")
+print("ENTER POINTS, RANK STUDENT AND SORT STUDENTS LIST")
 while True:
-    print("1. Enter points and rank Student")
+    print("1. Show student list")
+    print("2. Enter points and rank Student")
+    print("3. Save students list with points and rank")
+    print("4. Sort students list based on condition and Save")
+    print("5. Show sorted list")
+    print("6. Exit program")
     choose = input("Enter your choose: ")
     choose = fp.check(choose)
     if choose == 1:
-        fp.addPointsAndRanks(listStudent)
+        for i in listStudentPointsandRank:
+            print(i)
+    elif choose == 2:
+        fp.addPointsAndRanks(listStudentPointsandRank)
         time.sleep(2)
-    if choose == 2:
+    elif choose == 3:
+        fileName = input("File Name: ")
+        with open(fileName+".pickle", "wb") as f:
+            save = pk.dump(listStudentPointsandRank, f)
+            f.close()
+    elif choose == 4:
+        sortedList = fp.sortStudentsList(listStudentPointsandRank)
+        while True:
+            option = input("Do you want to save?(Y/N): ")
+            if option in "Yy":
+                fileName = input("File Name: ")
+                with open(fileName+".pickle", "wb") as f:
+                    save = pk.dump(sortedList, f)
+                    f.close()
+                    break
+            elif option in "Nn":
+                break
+    elif choose == 5:
+        for i in sortedList:
+            print(i)
+    elif choose == 6:
         break
