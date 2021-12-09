@@ -5,9 +5,9 @@ class ManagementAll:
         st = Student(firstName, lastName, age, sex, phoneNumber, email, studentNumber)
         return st
 
-    def inputCourse(self, courseType:int, specializationName:str, ternName:list, credits:list):
+    def inputCourse(self, courseType:int, specializationName:str, termName:list, credits:list):
         course = Course(courseType)
-        term = Terms(specializationName, course, ternName, credits)
+        term = Terms(specializationName, course, termName, credits)
         return term
     
     def inputLecturer(self, firstName:str, lastName:str, age:int, sex:str, phoneNumber:str, email:str, degreeType:str, major:str, classTerm:str):
@@ -31,7 +31,7 @@ class ManagementAll:
         rank = Rank(sp, tp)
         return rank.ranked()
 
-    def addYUMList(self, YUM:bool, inputStudent):
+    def addYUMList(self, YUM:bool, inputStudent:list):
         yum = YouthUnion(YUM, inputStudent)
         yum.addYouthUnionMember()
         return yum.youthUnionMember()

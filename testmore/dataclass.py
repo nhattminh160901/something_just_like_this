@@ -35,15 +35,15 @@ class Specialization:
         return self.specializationName
 
 class Terms(Specialization):
-    def __init__(self, specializationName, course, ternName:list, credits:list):
+    def __init__(self, specializationName, course, termName:list, credits:list):
         Specialization.__init__(self, specializationName, course)
-        self.ternName = ternName
+        self.termName = termName
         self.credits = credits
     
     def getTermsandCredits(self):
         TandC = {}
         dem = 0
-        for i in self.ternName:
+        for i in self.termName:
             TandC[i] = self.credits[dem]
             dem +=1
         return TandC

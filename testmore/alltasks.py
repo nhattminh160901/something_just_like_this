@@ -36,7 +36,8 @@ informationAllClass = openData(informationAllClass)
 print("Open Students List with Points and Rank")
 listStudentPointsandRank = None
 listStudentPointsandRank = openData(listStudentPointsandRank)
-print("Finish")
+print("Finish....")
+time.sleep(5)
 while True:
     print("1. Students List")
     print("2. Youth Union Member List")
@@ -127,7 +128,7 @@ while True:
                 fp.findStudentbyRank(listStudentPointsandRank)
             if option == 6:
                 break
-    if option == 6:
+    if choose == 6:
         print("1. Show students list sort by First Name")
         print("2. Show students list sort by GPA")
         print("3. Show students list sort by Training Point")
@@ -139,5 +140,5 @@ while True:
             listSort = openData(listSort)
         if option == 4:
             break
-    if option == 7:
+    if choose == 7:
         break
