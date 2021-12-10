@@ -99,8 +99,8 @@ while True:
             option = input("Enter your option: ")
             option = fp.check(option)
             if option == 1:
-                for i in listLecturer:
-                    print(i)
+                for i in informationAllClass:
+                    print(i, informationAllClass[i])
             if option == 2:
                 break
     if choose == 5:
@@ -138,6 +138,8 @@ while True:
         if option == 1 or option == 2 or option == 3:
             listSort = None
             listSort = openData(listSort)
+            for i in listSort:
+                print(i)
         if option == 4:
             break
     if choose == 7:

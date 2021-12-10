@@ -134,6 +134,7 @@ class FrontProgram:
         mng = ManagementAll()
         print("1. Male\n2. Female")
         choose = input("Your choose: ")
+        choose = FrontProgram().check(choose)
         if choose == 1:
             mng.findBySex(listStudent, "Male")
         if choose == 2:
@@ -177,18 +178,18 @@ class FrontProgram:
             option = FrontProgram().check(option)
             if option == 1:
                 optioN = False
-                studentSort = mng.sortList(listStudent, 11, optioN)
+                studentSort = mng.sortList(listStudent, 10, optioN)
             elif option == 2:
                 optioN = True
-                studentSort = mng.sortList(listStudent, 11, optioN)
+                studentSort = mng.sortList(listStudent, 10, optioN)
         if choose == 3:
             print("1. Ascending\n2. Descending")
             option = input("Your choose: ")
             option = FrontProgram().check(option)
             if option == 1:
                 optioN = False
-                studentSort = mng.sortList(listStudent, 12, optioN)
+                studentSort = mng.sortList(listStudent, 11, optioN)
             elif option == 2:
                 optioN = True
-                studentSort = mng.sortList(listStudent, 12, optioN)
+                studentSort = mng.sortList(listStudent, 11, optioN)
         return studentSort

@@ -163,16 +163,3 @@ class Rank:
             return "Weak"
         else:
             return "Poor"
-
-# abc = []
-# a = Course(1)
-# b = Terms('KHDL&TTNT', a, ['NNLTPython', 'TinHocUngDung'], [4,4])
-# stu = Student('Minh', 'Le Quang Nhat', 21, 'male', '8484848', 'minh@gmail.com', '123456')
-# stu.informationStudentCourse(b)
-# stu.addListStudent(abc)
-# stu = Student('Tri', 'Ho Minh', 21, 'male', '8484848', 'minh@gmail.com', '123456')
-# stu.informationStudentCourse(b)
-# stu.addListStudent(abc)
-# lec = Lecturer('Cuong', 'Nguyen Dinh Hoa', 35, 'male', '848484', 'cuong@gmail.com', 'TS', 'AI')
-# lec.addStudentClass('KHDL&TTNT', abc)
-# print(lec.getStudentClass())
